@@ -1,6 +1,6 @@
 import os
 import sys
-from sqlalchemy import Column, ForeignKey, Integer, String,Float
+from sqlalchemy import Column, ForeignKey, Integer, String,Float,Date
 from sqlalchemy.orm import relationship, declarative_base
 from sqlalchemy import create_engine
 from eralchemy2 import render_er
@@ -24,7 +24,20 @@ class Personaje(Base):
     color_piel = Column(String(50))
 
 class Planeta(Base):
-    __tab
+    __tablename__ = 'planeta'
+    id = Column(Integer,primary_key=True)
+    nombre = Column(String(50),nullable=False)
+    diametro = Column(Float,nullable=False)
+    clima = Column(String(50),nullable=False)
+    terreno = Column(String(50),nullable=False)
+
+class Favoritos(Base):
+    __tablename__ = 'favoritos'
+    id = Column(Integer,primary_key=True)
+    usuario_id = Column(Integer,ForeignKey('usuario.id'),nullable =False)
+    personaje_id = Column(Integer,ForeignKey('personaje.id'),nullable =False)
+    planeta_id = Column(Integer,ForeignKey('planeta.id'),nullable =False)
+    fecha_favorito = Column (Date,nullable =False)
 
     def to_dict(self):
         return {}

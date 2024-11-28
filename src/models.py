@@ -1,29 +1,30 @@
 import os
 import sys
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String,Float
 from sqlalchemy.orm import relationship, declarative_base
 from sqlalchemy import create_engine
 from eralchemy2 import render_er
 
 Base = declarative_base()
+ 
+class Usuario(Base):
+     __tablename__ = 'usuario'
+     id = Column(Integer,primary_key=True)
+     nombre = Column(String(50), nullable=False)
+     apellido = Column(String(70),nullable=False)
+     email = Column(String(50),nullable=False) 
+     contraseña = Column(String(50),nullable=False)
 
-class Person(Base):
-    __tablename__ = 'person'
-    # Here we define columns for the table person
-    # Notice that each column is also a normal Python instance attribute.
-    id = Column(Integer, primary_key=True)
-    name = Column(String(250), nullable=False)
+class Personaje(Base):
+    __tablename__ = 'personaje'
+    id = Column(Integer,primary_key=True)
+    nombre = Column(String(50),nullable=False)
+    altura = Column(Float,nullable=False)
+    genero = Column(String(50))
+    color_piel = Column(String(50))
 
-class Address(Base):
-    __tablename__ = 'address'
-    # Here we define columns for the table address.
-    # Notice that each column is also a normal Python instance attribute.
-    id = Column(Integer, primary_key=True)
-    street_name = Column(String(250))
-    street_number = Column(String(250))
-    post_code = Column(String(250), nullable=False)
-    person_id = Column(Integer, ForeignKey('person.id'))
-    person = relationship(Person)
+class Planeta(Base):
+    __tab
 
     def to_dict(self):
         return {}
